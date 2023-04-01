@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	Long id;
 	String nome;
-	String documento;
-	Integer idade;
+	String email;
+	String senha;
 }

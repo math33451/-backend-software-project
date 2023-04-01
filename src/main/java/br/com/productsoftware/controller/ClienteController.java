@@ -34,10 +34,10 @@ public class ClienteController {
 	
 	@GetMapping("/{documento}")
 	public Cliente buscarCliente(@PathVariable String documento) {
-		return clienteService.buscarPorDocumento(documento);
+		return clienteService.buscarCliente(documento);
 	}
 	
-	@PostMapping("/criarCliente")
+	@PostMapping("/criar")
 	public ResponseEntity<?> criarCliente(@RequestBody ClienteDTO clienteDTO) throws Exception {
 		try {
 			clienteService.salvar(clienteMapper.dtoParaDomain(clienteDTO));
@@ -47,9 +47,9 @@ public class ClienteController {
 		}
 	}
 	
-	@DeleteMapping("/apagarCliente/{documento}")
+	@DeleteMapping("/apagar/{documento}")
 	public ResponseEntity<?> deletarCliente(@PathVariable String documento){
-		clienteService.deletarPorDocumento(documento);
+		clienteService.deletarCliente(documento);
 		return ResponseEntity.ok().build();
 	}
 }
