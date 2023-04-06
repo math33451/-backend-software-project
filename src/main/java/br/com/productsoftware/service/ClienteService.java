@@ -21,18 +21,26 @@ public class ClienteService {
 
 	public void salvar(Cliente cliente) throws ClienteException {
 		try {
-			Cliente clienteExistente = this.buscarCliente(cliente.getDocumento());
+			Cliente clienteExistente = this.buscarClienteByDoc(cliente.getDocumento());
 			if(clienteExistente != null) {
 				throw new ClienteException("Cliente já registrado com este documento.");
 			}
+			clienteExistente = this.buscarClienteByEmail(cliente.getEmail());
+			if(clienteExistente != null) {
+				throw new ClienteException("Cliente já registrado com este email.");
+			}
 			clienteRepository.save(cliente);
 		} catch (ClienteException e) {
-			throw new ClienteException("Cliente já registrado com este documento.");
+			throw new ClienteException(e.getMessage());
 		}
 	}
 
-	public Cliente buscarCliente(String documento) {
+	public Cliente buscarClienteByDoc(String documento) {
 		return clienteRepository.findByDocumento(documento);
+	}
+	
+	public Cliente buscarClienteByEmail(String email) {
+		return clienteRepository.findByEmail(email);
 	}
 
 	public void deletarCliente(String documento) {

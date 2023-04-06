@@ -13,6 +13,7 @@ public class ClienteMapper {
 		cliente.setNome(dto.getNome());
 		cliente.setDocumento(dto.getDocumento());
 		cliente.setIdade(dto.getIdade());
+		cliente.setEmail(dto.getEmail());
 		return cliente;
 	}
 	

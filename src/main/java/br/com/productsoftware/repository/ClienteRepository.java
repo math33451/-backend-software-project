@@ -11,4 +11,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	Cliente findByDocumento(String documento);
 	
 	void deleteByDocumento(String documento);
+
+	Cliente findByEmail(String email);
 }

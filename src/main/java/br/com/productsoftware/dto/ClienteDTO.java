@@ -11,4 +11,5 @@ public class ClienteDTO {
 	String nome;
 	String documento;
 	Integer idade;
+	String email;
 }

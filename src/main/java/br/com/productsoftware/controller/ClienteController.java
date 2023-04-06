@@ -34,7 +34,7 @@ public class ClienteController {
 	
 	@GetMapping("/{documento}")
 	public Cliente buscarCliente(@PathVariable String documento) {
-		return clienteService.buscarCliente(documento);
+		return clienteService.buscarClienteByDoc(documento);
 	}
 	
 	@PostMapping("/criar")
