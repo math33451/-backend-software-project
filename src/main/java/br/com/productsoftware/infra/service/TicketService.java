@@ -1,5 +1,6 @@
 package br.com.productsoftware.infra.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,9 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.productsoftware.infra.TicketMapper;
 import br.com.productsoftware.infra.domain.Ticket;
 import br.com.productsoftware.infra.dto.TicketDTO;
+import br.com.productsoftware.infra.mapper.TicketMapper;
 import br.com.productsoftware.infra.repository.TicketRepository;
 
 @Service
@@ -21,8 +22,17 @@ public class TicketService {
 	@Autowired
 	private TicketMapper mapper;
 
-	public List<Ticket> buscarTodos() {
-		return ticketRepository.findAll();
+	@SuppressWarnings("null")
+	public List<TicketDTO> buscarTodos() {
+		List<Ticket> lista = ticketRepository.findAll();
+		List<TicketDTO> listaDTO = new ArrayList<TicketDTO>();
+		if(!lista.isEmpty()) {
+			for(Ticket t : lista) {
+				TicketDTO dto = mapper.toDTO(t);
+				listaDTO.add(dto);
+			}
+		}
+		return listaDTO;
 	}
 
 	public void salvar(TicketDTO ticketDTO) {
@@ -47,6 +57,22 @@ public class TicketService {
 		a.isVisualizado() == false).collect(Collectors.toList());
 		
 		
+	}
+
+	public Ticket buscarTicketById(Long id) {
+		return ticketRepository.findById(id).get();
+	}
+
+	public void visualizaTicket(Long id) {
+		Ticket ticket = buscarTicketById(id);
+		ticket.setVisualizado(true);
+		ticketRepository.save(ticket);
+	}
+
+	public void encerraTicket(Long id) {
+		Ticket ticket = buscarTicketById(id);
+		ticket.setAtendido(true);
+		ticketRepository.save(ticket);
 	}
 	
 }

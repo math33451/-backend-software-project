@@ -1,7 +1,5 @@
 package br.com.productsoftware.infra.dto;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -17,7 +15,7 @@ public class TicketDTO {
 	private String telefoneSolicitante;
 	private String numeroSerieBalanca;
 	private Integer qtdBalanca;
-	private Date dtEmissaoTicket;
+	private String dtEmissaoTicket;
 	private boolean visualizado = false;
 	private boolean atendido = false;
 	private String descricao;
