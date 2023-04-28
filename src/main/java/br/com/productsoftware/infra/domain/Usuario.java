@@ -1,4 +1,4 @@
-package br.com.productsoftware.domain;
+package br.com.productsoftware.infra.domain;
 
 import java.util.Collection;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package br.com.productsoftware.domain;
+package br.com.productsoftware.infra.domain;
 
 import java.util.Date;
 
@@ -23,7 +23,10 @@ public class Ticket {
 	private Long id;
 	private String nomeSolicitante;
 	private Long documentoSolicitante;
-	private String numeroSerieBalança;
+	private String emailSolicitante;
+	private String telefoneSolicitante;
+	private String numeroSerieBalanca;
+	private Integer qtdBalanca;
 	private Date dtEmissaoTicket;
 	private boolean visualizado;
 	private boolean atendido;

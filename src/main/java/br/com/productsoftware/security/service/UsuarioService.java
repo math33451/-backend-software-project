@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import br.com.productsoftware.domain.Usuario;
-import br.com.productsoftware.repository.UsuarioRepository;
+import br.com.productsoftware.infra.domain.Usuario;
+import br.com.productsoftware.infra.repository.UsuarioRepository;
 import br.com.productsoftware.security.dto.UserDTO;
 
 @Service

@@ -1,4 +1,4 @@
-package br.com.productsoftware.enums;
+package br.com.productsoftware.infra.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

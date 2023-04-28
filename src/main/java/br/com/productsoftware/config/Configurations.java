@@ -32,7 +32,7 @@ public class Configurations {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/ticket/criar")
                 .permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

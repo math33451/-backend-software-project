@@ -1,4 +1,4 @@
-package br.com.productsoftware.exception;
+package br.com.productsoftware.infra.exception;
 
 public class UsuarioException extends Exception{
 
