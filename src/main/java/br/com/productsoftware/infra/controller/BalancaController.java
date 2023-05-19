@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/controller")
+@RequestMapping("/balanca")
 public class BalancaController {
 
 	@Autowired
@@ -49,6 +49,6 @@ public class BalancaController {
 	@DeleteMapping("/apagar/{id}")
 	public ResponseEntity<?> deletarBalanca(@PathVariable Long id){
 		balancaService.deletarBalanca(id);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("Balança excluída com sucesso.");
 	}
 }

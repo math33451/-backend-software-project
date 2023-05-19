@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import br.com.productsoftware.infra.domain.EstoquePeca;
 import br.com.productsoftware.infra.dto.EstoquePecaDTO;
 
+
 @Component
 public class EstoquePecaMapper {
 
@@ -25,5 +26,12 @@ public class EstoquePecaMapper {
 		dto.setValor(domain.getValor());
 		
 		return dto;
+	}
+	
+	public EstoquePeca atualizaPeca(EstoquePeca domain, EstoquePecaDTO dto) {
+		domain.setQuantidade(dto.getQuantidade());
+		domain.setValor(dto.getValor());
+		
+		return domain;
 	}
 }

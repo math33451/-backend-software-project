@@ -19,6 +19,7 @@ public class BalancaMapper {
 	
 	public BalancaDTO domainToDTO(Balanca domain) {
 		BalancaDTO dto = new BalancaDTO();
+		dto.setId(domain.getId());
 		dto.setDocumentoProprietario(domain.getDocumentoProprietario());
 		dto.setNumeroSerie(domain.getNumeroSerie());
 		dto.setTickets(domain.getTickets());

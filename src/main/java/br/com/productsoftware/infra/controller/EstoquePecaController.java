@@ -30,6 +30,11 @@ public class EstoquePecaController {
 		return estoquePecaService.findAll();
 	}
 	
+	@PostMapping("/atualizar")
+	public ResponseEntity<?> atualizarPeca(@RequestBody EstoquePecaDTO dto){
+		return estoquePecaService.atualizarPeca(dto);
+	}
+	
 	@GetMapping("/{id}")
 	public EstoquePeca buscarPecaById(@PathVariable Long id) {
 		return estoquePecaService.buscarPecaById(id);
@@ -44,6 +49,6 @@ public class EstoquePecaController {
 	@DeleteMapping("/apagar/{id}")
 	public ResponseEntity<?> deletarPeca(@PathVariable Long id){
 		estoquePecaService.deletarPeca(id);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("Peça excluída com sucesso.");
 	}
 }

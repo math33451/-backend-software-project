@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.productsoftware.infra.domain.EstoquePeca;
@@ -46,5 +47,12 @@ public class EstoquePecaService {
 	
 	public EstoquePeca buscarPecaById(Long id) {
 		return estoquePecaRepository.findById(id).get();
+	}
+
+	public ResponseEntity<?> atualizarPeca(EstoquePecaDTO dto) {
+		EstoquePeca pecaExistente = this.buscarPecaById(dto.getId());
+		pecaExistente = mapper.atualizaPeca(pecaExistente, dto);
+		estoquePecaRepository.save(pecaExistente);
+		return ResponseEntity.ok().body("Alterações salvas no banco de dados.");
 	}
 }
