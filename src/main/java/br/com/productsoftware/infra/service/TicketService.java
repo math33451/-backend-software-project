@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.productsoftware.infra.domain.Cliente;
 import br.com.productsoftware.infra.domain.Ticket;
 import br.com.productsoftware.infra.dto.TicketDTO;
 import br.com.productsoftware.infra.mapper.TicketMapper;
@@ -18,6 +19,9 @@ public class TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	@Autowired
 	private TicketMapper mapper;
@@ -36,13 +40,25 @@ public class TicketService {
 	}
 
 	public void salvar(TicketDTO ticketDTO) {
+		Cliente cliente = clienteService.buscarClienteByDoc(ticketDTO.getDocumentoSolicitante());
+		if(cliente == null) {
+			clienteService.criarCliente(ticketDTO);
+		}
 		Ticket ticket = mapper.toDomain(ticketDTO);
 		ticket.setDtEmissaoTicket(new Date());
 		ticketRepository.save(ticket);
 	}
 
-	public List<Ticket> buscarTicketByDoc(Long documento) {
-		return ticketRepository.findByDocumentoSolicitante(documento);
+	public List<TicketDTO> buscarTicketByDoc(Long documento) {
+		List<Ticket> lista = ticketRepository.findByDocumentoSolicitante(documento);
+		List<TicketDTO> listaDTO = new ArrayList<TicketDTO>();
+		if(!lista.isEmpty()) {
+			for(Ticket t : lista) {
+				TicketDTO dto = mapper.toDTO(t);
+				listaDTO.add(dto);
+			}
+		}
+		return listaDTO;
 	}
 
 	public void deletarTicket(Long id) {
@@ -60,7 +76,8 @@ public class TicketService {
 	}
 
 	public Ticket buscarTicketById(Long id) {
-		return ticketRepository.findById(id).get();
+		Ticket ticket =  ticketRepository.findById(id).get();
+		return ticket;
 	}
 
 	public void visualizaTicket(Long id) {

@@ -19,4 +19,5 @@ public class TicketDTO {
 	private boolean visualizado = false;
 	private boolean atendido = false;
 	private String descricao;
+	private String status;
 }

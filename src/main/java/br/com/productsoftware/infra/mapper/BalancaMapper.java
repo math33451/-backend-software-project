@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.productsoftware.infra.domain.Balanca;
 import br.com.productsoftware.infra.dto.BalancaDTO;
+import br.com.productsoftware.infra.dto.TicketDTO;
 
 @Component
 public class BalancaMapper {
@@ -12,7 +13,6 @@ public class BalancaMapper {
 		Balanca domain = new Balanca();
 		domain.setDocumentoProprietario(dto.getDocumentoProprietario());
 		domain.setNumeroSerie(dto.getNumeroSerie());
-		domain.setTickets(dto.getTickets());
 		
 		return domain;
 	}
@@ -22,8 +22,15 @@ public class BalancaMapper {
 		dto.setId(domain.getId());
 		dto.setDocumentoProprietario(domain.getDocumentoProprietario());
 		dto.setNumeroSerie(domain.getNumeroSerie());
-		dto.setTickets(domain.getTickets());
 		
 		return dto;
 	}
+	
+	public Balanca usandoTicket(TicketDTO dto) {
+		Balanca balanca = new Balanca();
+		balanca.setNumeroSerie(dto.getNumeroSerieBalanca());
+		balanca.setDocumentoProprietario(dto.getDocumentoSolicitante());
+		
+		return balanca;
+		}
 }

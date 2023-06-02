@@ -1,6 +1,7 @@
 package br.com.productsoftware.infra.mapper;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ public class TicketMapper {
 		domain.setNumeroSerieBalanca(dto.getNumeroSerieBalanca());
 		domain.setQtdBalanca(dto.getQtdBalanca());
 		domain.setDescricao(dto.getDescricao());
+		domain.setBalancas(new ArrayList<>());
 		
 		return domain;
 	}
@@ -35,6 +37,16 @@ public class TicketMapper {
 		dto.setQtdBalanca(d.getQtdBalanca());
 		dto.setDtEmissaoTicket(formataData(d.getDtEmissaoTicket()));
 		dto.setDescricao(d.getDescricao());
+		dto.setVisualizado(d.isVisualizado());
+		dto.setAtendido(d.isAtendido());
+		
+		if(d.isAtendido()) {
+			dto.setStatus("Encerrado");
+		}else if(d.isVisualizado()) {
+			dto.setStatus("Visualizado");;
+		}else {
+			dto.setStatus("Enviado");
+		}
 		
 		return dto;
 	}

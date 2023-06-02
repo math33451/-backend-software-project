@@ -1,5 +1,7 @@
 package br.com.productsoftware.infra.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,14 +13,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="BALANCA")
+@Table(name="CLIENTE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Balanca {
+public final class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String numeroSerie;
-	private Long documentoProprietario;
+	private String nome;
+	private Long documento;
+	private String email;
+	private String telefone;
+	
+	private List<String> balancas;
 }

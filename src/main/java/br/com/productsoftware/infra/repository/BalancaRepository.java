@@ -11,4 +11,6 @@ import br.com.productsoftware.infra.domain.Balanca;
 public interface BalancaRepository extends JpaRepository<Balanca, Long>{
 
 	List<Balanca> findByDocumentoProprietario(Long documento);
+	
+	Balanca findByNumeroSerie(String numeroSerie);
 }

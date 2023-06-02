@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.productsoftware.infra.domain.Ticket;
 import br.com.productsoftware.infra.dto.TicketDTO;
+import br.com.productsoftware.infra.service.BalancaService;
 import br.com.productsoftware.infra.service.TicketService;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,8 @@ import lombok.AllArgsConstructor;
 public class TicketController {
 	
 	private TicketService ticketService;
+	
+	private BalancaService balancaService;
 
 	@GetMapping()
 	public List<TicketDTO> buscarTodosTickets(){
@@ -30,7 +33,7 @@ public class TicketController {
 	}
 	
 	@GetMapping("/doc/{documento}")
-	public List<Ticket> buscarTicket(@PathVariable Long documento) {
+	public List<TicketDTO> buscarTicket(@PathVariable Long documento) {
 		return ticketService.buscarTicketByDoc(documento);
 	}
 	
@@ -63,8 +66,9 @@ public class TicketController {
 		if(ticketsPendentes != null && !ticketsPendentes.isEmpty()) {
 			return ResponseEntity.ok("Ticket já enviado, aguarde o retorno da equipe.");
 		}
+		balancaService.salvarDoTicket(ticketDTO);
 		ticketService.salvar(ticketDTO);
-		return ResponseEntity.ok("Ticket enviado, aguarde o contato da equipe");
+		return ResponseEntity.ok("Ticket enviado, acompanhe seu ticket pela tela inicial.");
 	}
 	
 	@DeleteMapping("/apagar/{id}")

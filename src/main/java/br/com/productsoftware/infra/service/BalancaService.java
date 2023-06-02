@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.productsoftware.infra.domain.Balanca;
 import br.com.productsoftware.infra.dto.BalancaDTO;
+import br.com.productsoftware.infra.dto.TicketDTO;
 import br.com.productsoftware.infra.mapper.BalancaMapper;
 import br.com.productsoftware.infra.repository.BalancaRepository;
 
@@ -51,4 +52,21 @@ public class BalancaService {
 	public Balanca buscarBalancaById(Long id) {
 		return balancaRepository.findById(id).get();
 	}
+
+	public Balanca salvarDoTicket(TicketDTO ticketDTO) {
+		Balanca balancaExistente = balancaRepository.findByNumeroSerie(ticketDTO.getNumeroSerieBalanca());
+		if(balancaExistente == null) {
+			Balanca balanca = mapper.usandoTicket(ticketDTO);
+			return balancaRepository.save(balanca);	
+		}
+		return balancaExistente;
+	}
+
+//	public Balanca salvarDoTicket(TicketDTO ticketDTO) {
+//		Balanca balanca = new Balanca();
+//		balanca.setNumeroSerie(ticketDTO.getNumeroSerieBalanca());
+//		balanca.setDocumentoProprietario(ticketDTO.getDocumentoSolicitante());
+//		 return balanca;
+//		
+//	}
 }
